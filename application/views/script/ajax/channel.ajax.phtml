@@ -7,7 +7,8 @@
                 <img src="/images/<?php echo $this->channel->getPic(); ?>">
             </div>
             <div id="radio_info_text">
-                <h1><?php echo $this->channel->getChannel(); ?></h1>
+                <h1> <a href="/ajax/channel/id/<?php echo $this->channel->getId(); ?>"
+                        class="ajax"><?php echo $this->channel->getChannel(); ?></a></h1>
 
                 <p>Битрейт: <span><b><?php echo $this->channel->getStreamObj()->getBitrate(); ?></b> kbits <?php echo $this->channel->getStreamObj()->getFormat(); ?></span></p>
 
