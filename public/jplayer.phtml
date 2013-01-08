@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title></title>
+
+
+
+</head>
+<body>
+<script type="text/javascript" src="/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui-1.8.2.custom.min.js"></script>
+<link type="text/css" rel="stylesheet" href="http://172.30.1.174:83/data/jplayer/blue/jplayer.blue.monday.css">
+<script type="text/javascript">
+    //vars
+    var player_id = 'jquery_jplayer_1';
+    var type = 'mp3'; //or ogg
+    $(document).ready(function () {
+        function scrollText(e) {
+            $(e).val()
+        }
+
+        $("#jquery_jplayer_1").jPlayer({
+            ready:function () {
+                $(this).jPlayer("setMedia", {
+                    mp3:"http://shoutcast.byfly.by:88/181chilled"
+                });
+            },
+            swfPath:"/jplayer",
+            supplied:"mp3"
+        });
+
+    });
+</script>
+<div class="wrapper1">
+    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+    <div id="jp_container_1" class="jp-audio"> <div class="jp-type-single">
+        <div class="jp-gui jp-interface"> <ul class="jp-controls">
+            <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+            <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+            <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+            <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+            <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+            <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max volume</a></li>
+        </ul>  <div class="jp-volume-bar">  <div class="jp-volume-bar-value"></div>
+        </div>  </div>  <div class="jp-title">
+        <ul>
+            <li><div id="scroll">
+                <marquee scrolldelay="500" scrollamount="10" vspace="0"></marquee>
+            </div></li>
+        </ul>
+    </div>
+        <div class="jp-no-solution">
+            <span>Update Required</span>  To play the media you will need to either update your browser to a recent version or update your
+            <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

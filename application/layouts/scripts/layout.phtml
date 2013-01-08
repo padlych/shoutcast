@@ -1,0 +1,362 @@
+<?php echo $this->doctype() ?>
+<html xmlns:rgter="http://www.w3.org/1999/xhtml">
+<head>
+    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headScript() ?>
+    <?php echo $this->headTitle() ?>
+<body>
+<script type="text/javascript" src="http://readaloud.me/xdm/easyXDM.min.js"></script>
+<script type="text/javascript" src="http://readaloud.me/default/account/services/format/html"></script>
+<script type="text/javascript">
+    quotient = parseInt( $(window.document).height()/$(window).height() );
+    function isset(variable)
+    {
+        if (typeof(variable) != "undefined" && variable !== null) {
+            return true;
+        }
+        else return false;
+    }
+
+    window.onscroll = function (e) {
+        var windowHeight = $(window).height();
+        var documentHeight = $(document).height();
+        var currentHeight = $(document).scrollTop();
+        if ( quotient > 3 ) {
+            if (currentHeight > (windowHeight * 1.0) ) {
+                $('#up_button').show('slow');
+            } else {
+                $('#up_button').hide('slow');
+            }
+        }
+    };
+
+//  load page components here
+    $(document).ready(function () {
+
+        quotient = parseInt( $(window.document).height()/$(window).height() );
+
+        //scroll page to the top
+        $('#up_button').click(function () {
+            $("html, body").animate({ scrollTop: 0 }, 'slow');
+        });
+
+//        $.ajax({//load twitter info about 4 stations into header
+//            type:'POST',
+//            url:'/default/ajax/twitter/format/html',
+//            contentType:'application/x-www-form-urlencoded',
+//            data:'count=4',
+//            success:function (reply) {
+//               $('#on_line_radio').append(reply);
+//            }
+//        });
+
+        //disabling link redirect and loading href via ajax
+        $('a.ajax').live('click', function(e) {
+            e.preventDefault();
+            //parse url
+            //0 - nothing
+            //1 - controller
+            //2 - action
+            //3 - param
+            //4 - value
+            var href = $(this).attr('href');
+            var route = href.split('/');
+            if ( isset(route[1]) && isset(route[2]) && isset(route[3]) && isset(route[4]) ) {
+                var controller = route[1];
+                var action = route[2];
+                var param = route[3];
+                var value = route[4];
+                window.history.pushState("rewrite urls", controller, "/index/" + action + "/" + param + "/" + value);
+                $.ajax({
+                    type:'POST',
+                    url:'/default/' + controller + '/' + action + '/format/html',
+                    contentType:'application/x-www-form-urlencoded',
+                    data:{id:value},
+                    beforeSend:function () {
+                        var tmp = $('#middle_column>#on_line_radio');
+                        $('#middle_column').html(null);
+                        $('#middle_column').append(tmp);
+                        $('#middle_column').append('<img src="/images/loading1.gif" style="position:absolute; top:220px; left:50%; margin-left: -175px;"><h1 style="position:absolute; top:375px; left:50%; margin-left: -55px;">Loading...</h1>');
+                    },
+                    success:function (reply) {
+                        var tmp = $('#middle_column>#on_line_radio');
+                        $('#middle_column').html(null);
+                        $('#middle_column').append(tmp);
+                        $('#middle_column').append(reply);
+                        quotient = parseInt( $(window.document).height()/$(window).height() );
+                    }
+                });
+
+                if (action == 'channel') {
+                    $("html, body").animate({ scrollTop: 0 }, "slow");
+                    $.ajax({//load player
+                        type:'POST',
+                        url:'/default/ajax/player/format/html',
+                        contentType:'application/x-www-form-urlencoded',
+                        data:{id:value},
+                        beforeSend: function() {
+                            $('div.jp-audio').animate({ opacity: 0 }, "500");
+                        },
+                        success:function (reply) {
+                            $('#jquery_jplayer_1').jPlayer('destroy');
+                            $('#player_div').html(null);
+                            $('#player_div').append(reply);
+                            $('div.jp-audio').animate({ opacity: 1 }, "4000");
+                        }
+                    });
+                }
+            }
+        });
+
+        $.ajax({//init load player
+            type:'POST',
+            url:'/default/ajax/player/format/html',
+            contentType:'application/x-www-form-urlencoded',
+            data:{id:'auto'},
+            success:function (reply) {
+                $('#player_div').append(reply);
+//                $('div.jp-audio').css({ opacity: 0.3 });
+            }
+        });
+
+        //show search form
+        $('#reach_search').live('click', function() {
+            $.ajax({//load player
+                type:'POST',
+                url:'/default/ajax/searchform/format/html',
+                contentType:'application/x-www-form-urlencoded',
+                data:{id:'auto'},
+                success:function (reply) {
+                    $('#layout').css('display', 'block');
+                    $('#search_form').append(reply);
+                    $('#search_form').show(200);
+                    $('#channel').focus();
+                }
+            });
+        });
+
+        //close search form
+        $('#close_search').live('click', function() {
+            $('#layout').css('display', 'none');
+            $('#search_form').html(null);
+            $('#search_form').hide(500);
+        });
+
+        //send searcg form
+        $('#send_form').live('click', function() {
+            var boxes = new Array();
+            var submit = true;
+            boxes = $('input:checkbox:checked');
+            if ( !$('#channel').val() && (boxes.length == 0) ) {
+                alert('Слишком мало информации для поиска.');
+                submit = false;
+            }
+            if ( $('#channel').val().length < 3 ) {
+                alert('В поиске должно быть больше 3 букв.');
+                submit = false;
+            }
+            if ( $('#channel').val().trim() == 'radio' ) {
+                alert('Слово radio слишком общее.');
+                submit = false;
+            }
+            if (submit == true) {
+                    $('#send_form').hide();
+                    document.forms[0].submit();
+            }
+        });
+
+    });
+</script>
+<div id="up_button" style="position: fixed;
+ right:20%; top: 70%; border: 1px solid #000000; z-index: 20000;
+ padding:20px; font-size: 22px; color: #139eff; font-weight: bold; cursor: pointer;
+ display:none;
+ ">
+  Наверх &#8593;
+</div>
+<div id="mic" style="position: absolute; left: 1150px; top: 70px; ">
+    <img src="/images/mic.png" alt="" style="width:170px; height: 410px;" /></a>
+</div>
+<!--    form for station searching     -->
+<div id="layout" style="z-index: 2999; width: 118%; height: 100%;
+ background: rgba(255,119,37,0.36); position: absolute; top: 0; left: -10%; display: none;"></div>
+<div id="search_form" style="display:none; z-index: 7777;"></div>
+<!-- Шапка-->
+<div id="head">
+    <div id="logo">
+        <a href="/index"><img src="/images/logo.png" alt="" style="width:210px; height: 130px;"/></a>
+    </div>
+    <div id="menu">
+        <div>
+            <ul>
+                <li><a href="/index">Главная</a></li>
+                <li><a href="/ajax/top20/id/any" class="ajax">TOP 20</a></li>
+                <li><a href="/ajax/howto/id/any" class="ajax">Как нас слушать</a></li>
+                <li><a href="/ajax/howto/id/any" class="ajax">Вопрос-ответ</a></li>
+                <li style="padding:0; background:none;"><a href="/ajax/howto/id/any" class="ajax">О нас</a></li>
+            </ul>
+        </div>
+    </div>
+    <img style="position: absolute; left:230px; top:116px; height: 70px; width: 495px;" src="/images/iner_top.gif">
+    <div style="position: absolute; left:230px; top:116px;" id="player_div">
+
+    </div>
+
+</div>
+<!-- Конец шапки -->
+
+<div id="content">
+<!-- левая колонка -->
+<div id="left_column">
+    <form id="search" action="" method="get" style="position:absolute; left:-150px; top: -75px; z-index: 5000;">
+        <p>
+            <a id="reach_search" style="cursor: pointer; color: white; font-size: large; width: 300px;">
+                <img src="/images/search_button.png" style="width: 32px; height: 32px; float: left;">
+                <span style="float: left; margin-top: 10px; text-decoration: underline;">Поиск</span>
+            </a>
+        </p>
+    </form>
+    <div id="new_radio">
+        Новые станции
+    </div>
+    <?php
+    foreach ($this->boot_new as $new) {
+        ?>
+        <dl>
+            <dt><a href="/ajax/channel/id/<?php echo $new->getId(); ?>" class="ajax"><img
+                src="/images/<?php echo $new->getPic(); ?>" height="49px" width="49px"> </a></dt>
+            <dd>
+                <a href="/ajax/channel/id/<?php echo $new->getId(); ?>" class="ajax"><?php echo $new->getChannel(); ?></a>
+
+                <p>
+                    <?php
+                    $styles = $new->getStyles();
+                    foreach ($styles as $style) {
+                        if (($style instanceof Application_Model_Style) && $style->getId()) {
+                            ?>
+                            <a href="/ajax/style/id/<?php echo $style->getId();?>" class="ajax"> <?php echo $style->getStyle(); ?> </a>
+                            <?php
+                        }
+                    }
+                    ?>
+                    | <?php echo $new->getStreamObj()->getBitrate(); ?>
+                    kbits <?php  echo $new->getStreamObj()->getFormat(); ?>
+                </p>
+            </dd>
+        </dl>
+        <?php
+    }
+    ?>
+    <div class="baner">
+        <a href="#"><img src="/images/baner1.jpg" alt="" width="160px" height="160px"/></a>
+    </div>
+    <div id="very_best">Мы рекомендуем</div>
+    <?php
+    foreach ($this->boot_rand as $rand) {
+        ?>
+        <dl>
+            <dt><a href="/ajax/channel/id/<?php echo $rand->getId(); ?>" class="ajax"><img
+                src="/images/<?php echo $rand->getPic(); ?>" height="49px" width="49px"> </a></dt>
+            <dd>
+                <a href="/ajax/channel/id/<?php echo $rand->getId(); ?>" class="ajax"><?php echo $rand->getChannel(); ?></a>
+
+                <p>
+                    <?php
+                    $styles = $rand->getStyles();
+                    foreach ($styles as $style) {
+                        if (($style instanceof Application_Model_Style) && $style->getId()) {
+                            ?>
+                            <a href="/ajax/style/id/<?php echo $style->getId();?>" class="ajax"> <?php echo $style->getStyle(); ?> </a>
+                            <?php
+                        }
+                    }
+                    ?>
+                    | <?php echo $rand->getStreamObj()->getBitrate(); ?>
+                    kbits <?php  echo $rand->getStreamObj()->getFormat(); ?>
+                </p>
+            </dd>
+        </dl>
+        <?php
+    }
+    ?>
+</div>
+<!-- конец левая колонка -->
+<!-- правая колонка -->
+<div id="right_column">
+    <div id="news">
+        <div id="tag" class="t0" style="word-wrap: break-word;">
+            <?php
+            foreach ($this->boot_tags as $row) {
+                ?>
+                <span class="fancy" title=""><a href="/ajax/style/id/<?php echo $row['id'] ?>"
+                                                         class="ajax size<?php echo $row['size'];?>"><?php echo $row['style'];?></a></span>
+                <?php
+            }
+            ?>
+
+        </div>
+    </div>
+</div>
+<!-- конец правая колонка -->
+
+<!-- средняя колонка (основной контент) -->
+<div id="middle_column">
+    <div id="on_line_radio">
+        <b class="radio_on_line"><?php print_r( count($this->boot_top4) );?></b>
+        <?php foreach( $this->boot_top4 as $el ) { ?>
+        <div>
+                <span>
+                    <a href="/ajax/channel/id/<?php echo $el->getId(); ?>" class="ajax">
+                        <img alt="" src="/images/<?php echo $el->getPic(); ?>" height="50" width="45">
+                    </a>
+                </span>
+            <p>
+                <a href="/ajax/channel/id/<?php echo $el->getId(); ?>" class="ajax"><?php echo $el->getChannel(); ?></a>
+                <b>
+                    <?php
+                    $styles = $el->getStyles();
+                    foreach ($styles as $style) {
+                        if (($style instanceof Application_Model_Style) && $style->getId()) {
+                            ?>
+                            <a href="/ajax/style/id/<?php echo $style->getId();?>" class="ajax"> <?php echo $style->getStyle(); ?> </a>
+                            <?php
+                        }
+                    }
+                    ?>
+                    | <?php echo $el->getStreamObj()->getBitrate(); ?>
+                    kbits <?php  echo $el->getStreamObj()->getFormat(); ?>
+                </b>
+            </p>
+        </div>
+        <?php } ?>
+    </div>
+    <?php echo $this->layout()->content; ?>
+</div>
+<!-- конец средняя колонка (основной контент) -->
+</div>
+<!-- Конец контент -->
+
+<!-- Подвал  -->
+<div id="footer">
+    <div id="footer_blok">
+        <div id="footer_left">
+            © 2008 ShoutCast ByFly
+            <p>Cделано в студии Sitewood</p>
+        </div>
+        <!--        <ul id="footer_menu">-->
+        <!--            <li><a href="#">О проекте</a></li>-->
+        <!--            <li><a href="#">Как нас слушать</a></li>-->
+        <!--            <li><a href="#">FAQ</a></li>-->
+        <!--            <!--            <li><a href="#">Форум</a></li>-->-->
+        <!--            <!--            <li><a href="#">Список всех радиостанций</a></li>-->-->
+        <!--            <li style="border:0; padding:0; margin:0;"><a href="/index/asc/id/--><!--">По-->
+        <!--                алфавиту</a></li>-->
+        <!--        </ul>-->
+    </div>
+</div>
+<!-- Конец подвал  -->
+</body>
+</html>
+

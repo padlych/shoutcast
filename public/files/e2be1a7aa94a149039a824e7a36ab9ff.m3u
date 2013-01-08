@@ -1,0 +1,76 @@
+#EXTM3U 
+#EXTINF:-1, Bassdrive
+http://shoutcast.byfly.by:88/bassdrive
+
+#EXTINF:-1, Deep Mix Moscow Radio
+http://shoutcast.byfly.by:88/deepthemix
+
+#EXTINF:-1, Di.fm - DJ Mixes
+http://shoutcast.byfly.by:88/difm_djmixes
+
+#EXTINF:-1, Di.fm - Euro Trance
+http://shoutcast.byfly.by:88/difm_eurotrance
+
+#EXTINF:-1, Di.fm - Hard Core
+http://shoutcast.byfly.by:88/difm_hardcore
+
+#EXTINF:-1, Di.fm - Hard Dance
+http://shoutcast.byfly.by:88/difm_harddance
+
+#EXTINF:-1, Di.fm - Techno
+http://shoutcast.byfly.by:88/difm_techno
+
+#EXTINF:-1, FG Dj radio
+http://shoutcast.byfly.by:88/fgdjradio
+
+#EXTINF:-1, Soma FM - Drone Zone
+http://shoutcast.byfly.by:88/somafm_dronezone
+
+#EXTINF:-1, SunWave Station
+http://shoutcast.byfly.by:88/sunwave
+
+#EXTINF:-1, VirusFm
+http://shoutcast.byfly.by:88/virusfm
+
+#EXTINF:-1, Starnet.FM
+http://shoutcast.byfly.by:88/starnetfm
+
+#EXTINF:-1, PulsRadio
+http://shoutcast.byfly.by:88/pulsradio
+
+#EXTINF:-1, Technobase.fm
+http://shoutcast.byfly.by:88/technobase
+
+#EXTINF:-1, FG Underground
+http://shoutcast.byfly.by:88/fg_u
+
+#EXTINF:-1, XTC radio
+http://shoutcast.byfly.by:88/xtcradio
+
+#EXTINF:-1, ELEKTROWAVE.ORG
+http://shoutcast.byfly.by:88/elektrowave
+
+#EXTINF:-1, PulsRadio Version 9.0
+http://shoutcast.byfly.by:88/pulse90s
+
+#EXTINF:-1, D N B R A D I O
+http://shoutcast.byfly.by:88/dnb.ogg
+
+#EXTINF:-1, Di.fm - Classic Electronica
+http://shoutcast.byfly.by:88/difm_classicelectronika
+
+#EXTINF:-1, ClubRadio337
+http://shoutcast.byfly.by:88/clubradio337
+
+#EXTINF:-1, NERadio Sweden - Best of Techno & Trance
+http://shoutcast.byfly.by:88/sweden_tehno
+
+#EXTINF:-1, 181.fm - Chilled
+http://shoutcast.byfly.by:88/181chilled
+
+#EXTINF:-1, LiveSet.com
+http://shoutcast.byfly.by:88/liveset
+
+#EXTINF:-1, Discover Trance
+http://shoutcast.byfly.by:88/discovertrance
+

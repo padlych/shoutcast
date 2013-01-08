@@ -1,0 +1,703 @@
+<?php echo $this->doctype() ?>
+<html xmlns:rgter="http://www.w3.org/1999/xhtml">
+<head>
+    <META http-equiv=Content-Type content="text/html; charset=utf-8">
+    <?php echo $this->headLink() ?>
+    <?php echo $this->headScript() ?>
+    <?php echo $this->headTitle() ?>
+<body>
+<!--    form for station searching     -->
+<div id="layout" style="z-index: 2999; width: 118%; height: 100%;
+ background: rgba(255,119,37,0.36); position: absolute; top: 0; left: -10%; display: none;"></div>
+<div id="search_form" style="display:none;">
+<form name="my_form" id="my_form" action="/index/search" method="post"
+      style="width:600px; height:420px; position:fixed; top:13%; left:50%;
+        margin-left: -300px; z-index: 3000; border: 1px solid #3fdaff;
+        border-radius: 5px; background: rgba(0,105,155,0.84);
+        padding:20px;">
+<img id="close_search" style="position: absolute; top: 0%; left:97%; margin-top: -12px; cursor: pointer;"
+     src="/images/close_button.png">
+<fieldset style="float:left; width:100%; margin-bottom: 20px;">
+    <label style="color:white;">Название станции: <input type="text" id="channel" name="channel"></label>
+    <label style="color:white; margin-left: 20px;">Качество: <select style="width:143px;" id="bitrate"
+                                                                     name="bitrate">
+        <option selected="selected" value="all">любое</option>
+        <option value="600">600 kbit/s</option>
+        <option value="320">320 kbit/s</option>
+        <option value="256">256 kbit/s</option>
+        <option value="224">224 kbit/s</option>
+        <option value="192">192 kbit/s</option>
+        <option value="160">160 kbit/s</option>
+        <option value="128">128 kbit/s</option>
+        <option value="112">112 kbit/s</option>
+        <option value="96">96 kbit/s</option>
+        <option value="80">80 kbit/s</option>
+        <option value="64">64 kbit/s</option>
+        <option value="56">56 kbit/s</option>
+        <option value="48">48 kbit/s</option>
+        <option value="32">32 kbit/s</option>
+        <option value="24">24 kbit/s</option>
+    </select>
+    </label>
+    <label></label>
+</fieldset>
+<fieldset style="width: 100%;  margin-top: 10px; border-top: 1px solid #3fdaff; padding: 5px;">
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    70`s <input name="style_0"
+                value="1" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    90`s <input name="style_1"
+                value="2" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Acid <input name="style_2"
+                value="68" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Adult <input name="style_3"
+                 value="32" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Alternative <input name="style_4"
+                       value="3" type="checkbox"
+                       style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Ambient <input name="style_5"
+                   value="4" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Belarus <input name="style_6"
+                   value="67" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Blues <input name="style_7"
+                 value="7" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Breakbeat <input name="style_8"
+                     value="5" type="checkbox"
+                     style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Breaks <input name="style_9"
+                  value="58" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Children <input name="style_10"
+                    value="64" type="checkbox"
+                    style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Chillout <input name="style_11"
+                    value="14" type="checkbox"
+                    style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Christmas <input name="style_12"
+                     value="53" type="checkbox"
+                     style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Classical <input name="style_13"
+                     value="10" type="checkbox"
+                     style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Classic_Rock <input name="style_14"
+                        value="33" type="checkbox"
+                        style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Club <input name="style_15"
+                value="46" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    College <input name="style_16"
+                   value="44" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Country <input name="style_17"
+                   value="30" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Dance <input name="style_18"
+                 value="31" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Deep <input name="style_19"
+                value="59" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Dj_mixes <input name="style_20"
+                    value="16" type="checkbox"
+                    style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Downbeat <input name="style_21"
+                    value="60" type="checkbox"
+                    style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Drum&Bass <input name="style_22"
+                     value="39" type="checkbox"
+                     style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Dubstep <input name="style_23"
+                   value="70" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Electro <input name="style_24"
+                   value="38" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Emo <input name="style_25"
+               value="69" type="checkbox"
+               style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Eurodance <input name="style_26"
+                     value="18" type="checkbox"
+                     style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Flamenco <input name="style_27"
+                    value="55" type="checkbox"
+                    style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Folk <input name="style_28"
+                value="63" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Funk <input name="style_29"
+                value="47" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Gabber <input name="style_30"
+                  value="19" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Hardcore <input name="style_31"
+                    value="17" type="checkbox"
+                    style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Hip-Hop <input name="style_32"
+                   value="13" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Hits <input name="style_33"
+                value="24" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    House <input name="style_34"
+                 value="6" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Idm <input name="style_35"
+               value="61" type="checkbox"
+               style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Indie <input name="style_36"
+                 value="49" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Instrumental <input name="style_37"
+                        value="43" type="checkbox"
+                        style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Jazz <input name="style_38"
+                value="21" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Jungle <input name="style_39"
+                  value="52" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Latino <input name="style_40"
+                  value="57" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Lounge <input name="style_41"
+                  value="8" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Metal <input name="style_42"
+                 value="48" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    News <input name="style_43"
+                value="22" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    New_age <input name="style_44"
+                   value="37" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Nostalgia <input name="style_45"
+                     value="26" type="checkbox"
+                     style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Oldies <input name="style_46"
+                  value="27" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Pop <input name="style_47"
+               value="11" type="checkbox"
+               style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Progressive <input name="style_48"
+                       value="12" type="checkbox"
+                       style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Psychedelic <input name="style_49"
+                       value="40" type="checkbox"
+                       style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Punk <input name="style_50"
+                value="50" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Rave <input name="style_51"
+                value="51" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Reggae <input name="style_52"
+                  value="42" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Religious <input name="style_53"
+                     value="65" type="checkbox"
+                     style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Rock <input name="style_54"
+                value="9" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Rock-n-Roll <input name="style_55"
+                       value="34" type="checkbox"
+                       style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Romantic <input name="style_56"
+                    value="35" type="checkbox"
+                    style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Russian <input name="style_57"
+                   value="28" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Salsa <input name="style_58"
+                 value="56" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Smooth <input name="style_59"
+                  value="66" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Soundtracks <input name="style_60"
+                       value="41" type="checkbox"
+                       style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Sports <input name="style_61"
+                  value="29" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Talk <input name="style_62"
+                value="25" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Tech <input name="style_63"
+                value="62" type="checkbox"
+                style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Techno <input name="style_64"
+                  value="20" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Top40 <input name="style_65"
+                 value="45" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Trance <input name="style_66"
+                  value="15" type="checkbox"
+                  style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Various <input name="style_67"
+                   value="23" type="checkbox"
+                   style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    Vocal <input name="style_68"
+                 value="54" type="checkbox"
+                 style="float:right;">
+</label>
+<label style="color:white; float:left; width: 90px; margin-left: 40px;">
+    World <input name="style_69"
+                 value="36" type="checkbox"
+                 style="float:right;">
+</label>
+</fieldset>
+<fieldset style="width:100%; border-top: 1px solid #3fdaff;">
+    <center>
+        <input class="search_button" type="button" value="" style="margin: 5px;" id="send_form">
+    </center>
+</fieldset>
+</form>
+</div>
+<!--     end of form    -->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#close_search").live("click", function () {
+            $("#search_form").hide();
+            $("#layout").hide();
+        });
+        $("#reach_search").live("click", function () {
+            $("#search_form").show();
+            $("#layout").show();
+        });
+        $("#send_form").live("click", function () {
+            if ($("input:checkbox:checked").val() || $("#channel").val() || ($("option:selected").val() != "all")) {
+                document.my_form.submit();
+                $("#my_form").html('' +
+                    '<img style="position: absolute; top:57%; left:50%; margin-top: -24px; margin-left: -24px;" src="/images/loading.gif">' +
+                    '<span style="position: absolute; color:white; font-size: large; top:43%; left:50%; margin-left: -36px;">Loading . . .</span>' +
+                    '');
+            }
+            else {
+                alert("Определите критерии поиска!");
+            }
+        });
+    });
+</script>
+<!-- Шапка-->
+<div id="head">
+    <div id="logo">
+        <a href="/index"><img src="/images/logo.jpg" alt=""/></a>
+    </div>
+    <div id="menu">
+        <div>
+            <ul>
+                <li><a href="">Главная</a></li>
+                <li><a href="">TOP 20</a></li>
+                <li><a href="">Как нас слушать</a></li>
+                <li><a href="">Вопрос-ответ</a></li>
+                <li style="padding:0; background:none;"><a href="#">О нас</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--    <img src="/images/staff.png" alt="staff" style="width: 300px; height: 102px; padding: 5px; position: absolute; top:50%; left:380px;; margin-left: -51px;">-->
+    <div style="float: right; margin-right: -30px; margin-top: 50px;">
+<!--        <script type="text/javascript" src="/jplayer/jquery.jplayer.min.js"></script>-->
+<!--        <link type="text/css" rel="stylesheet" href="/jplayer/blue/jplayer.blue.monday.css">-->
+        <div class="wrapper1" style="height: 60px; float: left; display: block; margin-right:45px;">
+            <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+            <div id="jp_container_1" class="jp-audio">
+                <div class="jp-type-single">
+                    <div class="jp-gui jp-interface">
+                        <ul class="jp-controls">
+                            <li><a href="javascript:;" class="jp-play" tabindex="1">play</a></li>
+                            <li><a href="javascript:;" class="jp-pause" tabindex="1">pause</a></li>
+                            <li><a href="javascript:;" class="jp-stop" tabindex="1">stop</a></li>
+                            <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute">mute</a></li>
+                            <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute">unmute</a></li>
+                            <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume">max
+                                volume</a></li>
+                        </ul>
+                        <div class="jp-volume-bar">
+                            <div class="jp-volume-bar-value"></div>
+                        </div>
+                    </div>
+                    <div class="jp-title">
+                        <ul>
+                            <li>
+                                <div id="scroll">
+                                    <marquee scrolldelay="500" scrollamount="10" vspace="0">181chilled :: 96 kbit/s
+                                    </marquee>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="jp-no-solution">
+                        <span>Update Required</span>
+                        To play the media you will need to either update your browser to a recent version or update your
+                        <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            //vars
+            var player_id = "jquery_jplayer_1";
+            //    var path = "http://shoutcast.byfly.by:88/181chilled";
+            var path = "";
+            var type = "mp3"; //or ogg
+            $(document).ready(function () {
+                // $(".wrapper1").draggable();
+
+                function scrollText(e) {
+                    $(e).val()
+                }
+
+                $("#" + player_id).jPlayer({
+                    ready:function () {
+                        $(this).jPlayer("setMedia", {
+                            mp3:path
+                        });
+                    },
+                    swfPath:"http://www.jplayer.org/latest/js/Jplayer.swf",
+                    supplied:"mp3"
+                });
+            });
+        </script>
+    </div>
+</div>
+<!-- Конец шапки -->
+
+<div id="content">
+<!-- левая колонка -->
+<div id="left_column">
+    <form id="search" action="" method="get" style="position:absolute; left:-150px; top: -75px; z-index: 5000;">
+        <p>
+            <a id="reach_search" style="cursor: pointer; color: white; font-size: large; width: 300px;">
+                <img src="/images/search_button.png" style="width: 32px; height: 32px; float: left;">
+                <span style="float: left; margin-top: 10px; text-decoration: underline;">Поиск</span>
+            </a>
+        </p>
+    </form>
+    <div id="new_radio">
+        Новые станции
+    </div>
+    <?php
+    foreach ($this->boot_new as $new) {
+        ?>
+        <dl>
+            <dt><a href="/index/channel/id/<?php echo $new->getId(); ?>"><img
+                src="/images/<?php echo $new->getPic(); ?>" height="49px" width="49px"> </a></dt>
+            <dd>
+                <a href="/index/channel/id/<?php echo $new->getId(); ?>"><?php echo $new->getChannel(); ?></a>
+
+                <p>
+                    <?php
+                    $styles = $new->getStyles();
+                    foreach ($styles as $style) {
+                        if (($style instanceof Application_Model_Style) && $style->getId()) {
+                            ?>
+                            <a href="/index/style/id/<?php echo $style->getId();?>"> <?php echo $style->getStyle(); ?> </a>
+                            <?php
+                        }
+                    }
+                    ?>
+                    | <?php echo $new->getStreamObj()->getBitrate(); ?>
+                    kbits <?php  echo $new->getStreamObj()->getFormat(); ?>
+                </p>
+            </dd>
+        </dl>
+        <?php
+    }
+    ?>
+    <div class="baner">
+        <a href="#"><img src="/images/baner1.jpg" alt="" width="160px" height="160px"/></a>
+    </div>
+    <div id="very_best">Мы рекомендуем</div>
+    <?php
+    foreach ($this->boot_rand as $rand) {
+        ?>
+        <dl>
+            <dt><a href="/index/channel/id/<?php echo $rand->getId(); ?>"><img
+                src="/images/<?php echo $rand->getPic(); ?>" height="49px" width="49px"> </a></dt>
+            <dd>
+                <a href="/index/channel/id/<?php echo $rand->getId(); ?>"><?php echo $rand->getChannel(); ?></a>
+
+                <p>
+                    <?php
+                    $styles = $rand->getStyles();
+                    foreach ($styles as $style) {
+                        if (($style instanceof Application_Model_Style) && $style->getId()) {
+                            ?>
+                            <a href="/index/style/id/<?php echo $style->getId();?>"> <?php echo $style->getStyle(); ?> </a>
+                            <?php
+                        }
+                    }
+                    ?>
+                    | <?php echo $rand->getStreamObj()->getBitrate(); ?>
+                    kbits <?php  echo $rand->getStreamObj()->getFormat(); ?>
+                </p>
+            </dd>
+        </dl>
+        <?php
+    }
+    ?>
+</div>
+<!-- конец левая колонка -->
+<!-- правая колонка -->
+<div id="right_column">
+    <div id="news">
+        <div id="tag" class="t0" style="word-wrap: break-word;">
+            <?php
+            foreach ($this->boot_tags as $row) {
+                ?>
+                <span class="fancy" title="blablabla"><a href="/index/style/id/<?php echo $row['id'] ?>"
+                                                         class="size<?php echo $row['size'];?>"><?php echo $row['style'];?></a></span>
+                <?php
+            }
+            ?>
+
+        </div>
+    </div>
+</div>
+<!-- конец правая колонка -->
+
+<!-- средняя колонка (основной контент) -->
+<div id="middle_column">
+    <div id="on_line_radio">
+        <b class="radio_on_line">852</b>
+        <?php
+        if ($this->boot_users) {
+            foreach ($this->boot_users as $user) { ?>
+            <div>
+                <span>
+                    <a href="http://twitter.com/<?php echo $user->screen_name?>"><img src="<?php echo $user->profile_image_url_https; ?>"></a>
+                </span>
+                <p>
+                    <a href="http://twitter.com/<?php echo $user->screen_name?>"><?php echo $user->screen_name;?></a>
+                </p>
+            </div>
+                <?php
+            }
+        } else {
+            //get random stations from db or get twitter accs from db
+            //todo store twitter friends in db, check every 15 minutes
+            ?>
+            <div>
+                <span>
+                    <img alt="" src="resize.php?id=354&amp;w=45&amp;h=50">
+                </span>
+                <p>
+                    <a href="?radioid=354">NETradio HOT</a>
+                    <b>
+                        <a href="#">Top40</a> | 256 kbits MP3
+                    </b>
+                </p>
+            </div>
+            <div>
+                <span>
+                    <img alt="" src="resize.php?id=354&amp;w=45&amp;h=50">
+                </span>
+                <p>
+                    <a href="?radioid=354">NETradio HOT</a>
+                    <b>
+                        <a href="#">Top40</a> | 256 kbits MP3
+                    </b>
+                </p>
+            </div>
+            <div>
+                <span>
+                    <img alt="" src="resize.php?id=354&amp;w=45&amp;h=50">
+                </span>
+                <p>
+                    <a href="?radioid=354">NETradio HOT</a>
+                    <b>
+                        <a href="#">Top40</a> | 256 kbits MP3
+                    </b>
+                </p>
+            </div>
+            <div>
+                <span>
+                    <img alt="" src="resize.php?id=354&amp;w=45&amp;h=50">
+                </span>
+                <p>
+                    <a href="?radioid=354">NETradio HOT</a>
+                    <b>
+                        <a href="#">Top40</a> | 256 kbits MP3
+                    </b>
+                </p>
+            </div>
+            <?php
+        }
+        ?>
+    </div>
+    <?php  echo $this->layout()->content; ?>
+</div>
+<!-- конец средняя колонка (основной контент) -->
+</div>
+<!-- Конец контент -->
+
+<!-- Подвал  -->
+<div id="footer">
+    <div id="footer_blok">
+        <div id="footer_left">
+            © 2008 ShoutCast ByFly
+            <p>Cделано в студии Sitewood</p>
+        </div>
+        <!--        <ul id="footer_menu">-->
+        <!--            <li><a href="#">О проекте</a></li>-->
+        <!--            <li><a href="#">Как нас слушать</a></li>-->
+        <!--            <li><a href="#">FAQ</a></li>-->
+        <!--            <!--            <li><a href="#">Форум</a></li>-->-->
+        <!--            <!--            <li><a href="#">Список всех радиостанций</a></li>-->-->
+        <!--            <li style="border:0; padding:0; margin:0;"><a href="/index/asc/id/--><!--">По-->
+        <!--                алфавиту</a></li>-->
+        <!--        </ul>-->
+    </div>
+</div>
+<!-- Конец подвал  -->
+</body>
+</html>
+

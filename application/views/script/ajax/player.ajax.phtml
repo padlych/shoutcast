@@ -1,0 +1,67 @@
+<div class="wrapper1" style="height: 60px; float: left; display: block; margin-right:45px;">
+        <div id="jquery_jplayer_1" class="jp-jplayer" ></div>
+        <div id="jp_container_1" class="jp-audio">
+            <div class="jp-type-single">
+                <div class="jp-gui jp-interface" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>>
+                    <ul class="jp-controls" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>>
+                        <li><a href="javascript:;" class="jp-play" tabindex="1" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>>play</a></li>
+                        <li><a href="javascript:;" class="jp-pause" tabindex="1" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>>pause</a></li>
+                        <li><a href="javascript:;" class="jp-stop" tabindex="1" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>>stop</a></li>
+                        <li><a href="javascript:;" class="jp-mute" tabindex="1" title="mute" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>>mute</a></li>
+                        <li><a href="javascript:;" class="jp-unmute" tabindex="1" title="unmute" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>>unmute</a></li>
+                        <li><a href="javascript:;" class="jp-volume-max" tabindex="1" title="max volume" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>>max
+                            volume</a></li>
+                    </ul>
+                    <div class="jp-volume-bar">
+                        <div class="jp-volume-bar-value" <?php if (!$this->display) {?> onclick="warn(this)" <?php }?>></div>
+                    </div>
+                </div>
+                <div class="jp-title">
+                    <ul>
+                        <li>
+                            <div id="scroll">
+                                <marquee scrolldelay="500" scrollamount="10" vspace="0"><?php echo $this->channel; ?> :: <?php echo $this->bitrate; ?> kbit/s
+                                </marquee>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="jp-no-solution">
+                    <span>Update Required</span>
+                    To play the media you will need to either update your browser to a recent version or update your
+                    <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function warn(e)
+        {
+            alert('Сначала нужно выбрать станцию или канал!');
+        }
+
+        //vars
+        var player_id = "jquery_jplayer_1";
+        var path = "http://shoutcast.byfly.by:88/<?php echo $this->byfly ?>";
+        $(document).ready(function () {
+            function scrollText(e) {
+                $(e).val()
+            }
+            $("#" + player_id).jPlayer({
+            <?php if ($this->display) { ?>
+                ready:function () {
+                    $(this).jPlayer("setMedia", {
+                        <?php echo $this->format; ?>:path
+                    });
+                 },
+                swfPath:"http://www.jplayer.org/latest/js/Jplayer.swf",
+                supplied:"<?php echo $this->format; ?>",
+                volume:"0.3",
+                preload:"auto",
+                width:"495",
+                height:"70",
+            <?php } ?>
+            });
+
+        });
+    </script>

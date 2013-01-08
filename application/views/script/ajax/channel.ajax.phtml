@@ -1,0 +1,47 @@
+<br>
+<br>
+<div id="right_content">
+    <div id="right_content_border">
+        <div id="radio_info">
+            <div id="radio_ico">
+                <img src="/images/<?php echo $this->channel->getPic(); ?>">
+            </div>
+            <div id="radio_info_text">
+                <h1><?php echo $this->channel->getChannel(); ?></h1>
+
+                <p>Битрейт: <span><b><?php echo $this->channel->getStreamObj()->getBitrate(); ?></b> kbits <?php echo $this->channel->getStreamObj()->getFormat(); ?></span></p>
+
+                <p>Стиль: <span>
+                        <?php
+                    $styles = $this->channel->getStyles();
+                    foreach ($styles as $style) {
+                        if ( ($style instanceof Application_Model_Style) && $style->getId() ) {
+                            ?>
+                            <a href="/ajax/style/id/<?php echo $style->getId();?>" class="ajax"> <?php echo $style->getStyle(); ?> , </a>
+                            <?php
+                        }
+                    }
+                    ?>
+                    </span>
+                </p>
+            </div>
+<!--            <div id="radio_rating">-->
+<!--                <p><span class="radio_rating"><b>25</b> место в рейтинге</span></span></p>-->
+<!---->
+<!--                <p>Количество слушателей: <span>0</span></p>-->
+<!---->
+<!--                <p>Максимальное: <span>3</span></p>-->
+<!--            </div>-->
+        </div>
+        <div id="radio_play">
+            <a href="http://<?php echo $this->channel->getStationObj()->getWww(); ?>" class="radio_url" target="_blank">http://<?php echo $this->channel->getStationObj()->getWww(); ?></a>
+<!--            <a href="" class="radio_vote">Голосовать за радио</a>-->
+        </div>
+        <div id="radio_text">
+            <p>
+                <?php echo $this->channel->getDescription(); ?></p>
+
+        </div>
+    </div>
+</div>
+

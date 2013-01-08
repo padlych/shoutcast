@@ -1,0 +1,100 @@
+<div id="style_radio">
+    <div class="style_text">
+        Результаты поиска:
+    </div>
+    <div style="position: absolute; left:50%; top:12px;">
+        <?php
+        $channel_ids = array();
+        foreach ($this->channels as $channel) {
+            $channel_ids[] = $channel->getId();
+        }
+        $playlistUrl = $this->url(array(
+            'controller' => 'index',
+            'action'     => 'playlist',
+            'id'        => $channel_ids
+        )); ?>
+        <a href="<?php echo $playlistUrl; ?>" style="float:left; margin-left: 10px; " title="Скачать playlist">Playlist</a>
+    </div>
+    <?php if ( empty($this->channels) ) { ?>
+    <div class="style_radio_text">Ничего не найдено</div>
+    <?php } else { ?>
+    <div class="style_radio_text">
+     <?php
+        $number = count($this->channels);
+        $str = (string) $number;
+        $letter = '';
+        switch ($str[strlen($str) - 1]) {
+            case 1: $letter = 'я';
+                break;
+            case 2: $letter = 'и';
+                break;
+            case 3: $letter = 'и';
+                break;
+            case 4: $letter = 'и';
+                break;
+            default: $letter = 'й';
+        }
+    print_r($number); ?> радиостанци<?php echo $letter; ?></div>
+    <?php } ?>
+</div>
+<div id="radio_style_all">
+    <?php
+    if ( empty($this->channels) ) {
+        echo "<h1 style='padding-top: 20px;'>По заданным критериям ничего не найдено. Попробуйте изменить условия поиска.</h1>";
+    } else {
+        foreach ($this->channels as $channel) {
+            ?>
+            <span>
+            <span>
+                <span>
+                    <dl>
+                        <dt>
+                            <img alt="" src="/images/<?php echo $channel->getPic(); ?>"
+                                 style="width:50px; height: 50px;">
+                        </dt>
+                        <dd>
+                            <a href="/ajax/channel/id/<?php echo $channel->getId(); ?>"
+                               class="ajax"><?php echo $channel->getChannel(); ?></a>
+
+                            <p>
+                                <?php
+                                $styles = $channel->getStyles();
+                                foreach ($styles as $style) {
+                                    if (($style instanceof Application_Model_Style) && $style->getId()) {
+                                        ?>
+                                        <a href="/ajax/style/id/<?php echo $style->getId();?>"
+                                           class="ajax"> <?php echo $style->getStyle(); ?> </a>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                                <i><?php echo $channel->getStreamObj()->getBitrate(); ?>
+                                    kbits <?php echo  $channel->getStreamObj()->getFormat(); ?></i>
+                            </p>
+                        </dd>
+                    </dl>
+                   <div style="width:200%; height: 70px; position: absolute; bottom: 0%;">
+                       <a class="ajax music" title="Слушать радио" style="float:left;  margin-left: 10px; margin-top: 17px;"
+                          href="/ajax/channel/id/<?php echo $channel->getId(); ?>"></a>
+                       <?php
+                       $playlistUrl = $this->url(array(
+                           'controller' => 'index',
+                           'action'     => 'playlist',
+                           'id'         => $channel->getId()
+                       )); ?>
+                       <a href="<?php echo $playlistUrl; ?>" class="price" style="float:left; margin-left: 10px; " title="Скачать playlist">Playlist</a>
+                       <a class="url_radio" title="Перейти на сайт радиостанции" style="float:left;  margin-left: 10px; margin-top: 23px; font-size: 12px; color: #1689D1;"
+                          href="http://<?php echo $channel->getStationObj()->getWww(); ?>" target="_blank">Сайт
+                           радио</a>
+
+                   </div>
+                </span>
+            </span>
+		</span>
+            <?php
+        }
+    }
+    ?>
+
+
+</div>

@@ -1,0 +1,65 @@
+<?php
+if ($this->boot_users) {
+    foreach ($this->boot_users as $user) { ?>
+    <div>
+                 <span>
+                    <a href="http://twitter.com/<?php echo $user->getScreen();?>" target="_blank"><img src="<?php echo $user->getImg(); ?>"></a>
+                </span>
+        <p>
+            <a href="http://twitter.com/<?php echo $user->getScreen();?>" target="_blank"><?php echo $user->getScreen();?></a><br />
+            <a href="http://twitter.com/<?php echo $user->getScreen();?>" target="_blank"><img style="width:120px; height: 25px;" src="/images/twitter_allblue.png"></a>
+        </p>
+    </div>
+    <?php
+    }
+} else {
+    //get random stations from db or get twitter accs from db
+    //todo store twitter friends in db, check every 15 minutes
+    ?>
+<div>
+                <span>
+                    <img alt="" src="resize.php?id=354&amp;w=45&amp;h=50">
+                </span>
+    <p>
+        <a href="?radioid=354">NETradio HOT</a>
+        <b>
+            <a href="#">Top40</a> | 256 kbits MP3
+        </b>
+    </p>
+</div>
+<div>
+                <span>
+                    <img alt="" src="resize.php?id=354&amp;w=45&amp;h=50">
+                </span>
+    <p>
+        <a href="?radioid=354">NETradio HOT</a>
+        <b>
+            <a href="#">Top40</a> | 256 kbits MP3
+        </b>
+    </p>
+</div>
+<div>
+                <span>
+                    <img alt="" src="resize.php?id=354&amp;w=45&amp;h=50">
+                </span>
+    <p>
+        <a href="?radioid=354">NETradio HOT</a>
+        <b>
+            <a href="#">Top40</a> | 256 kbits MP3
+        </b>
+    </p>
+</div>
+<div>
+                <span>
+                    <img alt="" src="resize.php?id=354&amp;w=45&amp;h=50">
+                </span>
+    <p>
+        <a href="?radioid=354">NETradio HOT</a>
+        <b>
+            <a href="#">Top40</a> | 256 kbits MP3
+        </b>
+    </p>
+</div>
+<?php
+}
+?>

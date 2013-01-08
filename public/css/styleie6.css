@@ -1,0 +1,8 @@
+/*--------------------------------------------------------
+   Таблица стилей для IE6
+   файл:      styleie6.css
+---------------------------------------------------------*/
+
+body            {width:expression(document.documentElement.clientWidth < 960 ? "960px" : document.documentElement.clientWidth > 1440 ? "1440px" : "auto" );}
+
+#tag a .info	{background: none; width:232px; height:126px; filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='images/tag_info.png', sizingMethod='scale') ;}

@@ -1,0 +1,112 @@
+<?php
+$helper = $this->getHelper('GetIndexContent');
+$player = $this->getHelper('ShowPlayer');
+$stream = $this->getHelper('GetStreamParams');
+?>
+<!-- Контент -->
+
+<div id="content">
+<!-- Шапка контента -->
+<div id="content_top">
+    <div id="on_line_radio">
+        <?php
+        $i = 0;
+        while ($i < 2) {
+            $rand = $helper->getRandChannel(1);
+            if ($rand) {
+                ?>
+                <div>
+				<span>
+					<img src="/images/<?php echo $rand['pic']?>" alt="" width="50px;" height="50px;"/>
+				</span>
+
+                    <p>
+                        <a href="/index/channel/chid/<?php echo $rand['id']; ?>"><?php echo $rand['channel']; ?></a>
+                        <b>
+                            <?php echo $helper->getChannelStyles($rand['id']);?> |  <?php echo $helper->getChannelStream($rand['id']);?>
+                        </b>
+                    </p>
+                </div>
+                <?php
+                $i++;
+            }
+        }
+        ?>
+    </div>
+    <div id="recommendation">
+        наши рекомендации
+    </div>
+</div>
+<div id="style_radio">
+    <div class="style_bg_l"></div>
+    <div class="style_bg_r"></div>
+    <div class="style_text">
+        Стили
+    </div>
+    <a class="t0 tab-current">
+			<span>
+				<span class="buttom_radio">
+					По количеству<br /> радиостанций
+				</span>
+			</span>
+    </a>
+    <a class="t1">
+			<span>
+				<span>
+					По рейтингу
+				</span>
+			</span>
+    </a>
+    <div class="tyle_radio_name">
+        Радиостанции стиля: <i><?php echo $this->style; ?></i>
+    </div>
+</div>
+<!-- Конец шапка контента -->
+<!-- Левая калонка -->
+<div id="left_column" style="padding-right:14px;">
+    <div id="tag" class="t0">
+        <?php echo $helper->getStyles('amount'); ?>
+    </div>
+    <div id="tag" class="t1" style="display:none;">
+        <?php echo $helper->getStyles('rate'); ?>
+    </div>
+</div>
+<!-- Конец левая калонка -->
+<!-- Правая калонка -->
+<div id="right_column" style="width:725px;">
+<div id="radio_style_all">
+                    <?php
+                    foreach ($this->styles as $style) {
+                    ?>
+                    <span>
+						<span>
+							<span>
+							 	<dl>
+                                     <dt>
+                                         <img src="/images/<?php echo $style['pic'];?>" alt="" width="50px" height="50px" />
+                                     </dt>
+                                     <dd>
+                                         <a href="/index/channel/chid/<?php echo $style['id']; ?>"><?php echo $style['channel'];?></a>
+                                         <p><?php echo $helper->getChannelStyles($style['id']); ?>
+                                             <i><?php echo $style['bitrate']?> kbits <?php echo $style['format']; ?></i>
+                                         </p>
+                                     </dd>
+                                 </dl>
+								<div>
+                                    <a href="http://<?php echo $style['www'];?>" class="url_radio"><?php echo $style['www'];?></a>
+                                    <a  href="/index/channel/chid/<?php echo $style['id']; ?>" class="music"></a>
+                                </div>
+							</span>
+						</span>
+					</span>
+                        <?php }?>
+
+<div class="baner">
+    <a href="#"><img src="/images/baner2.gif" alt="" /></a>
+</div>
+</div>
+</div>
+<!-- Конец правая калонка -->
+</div>
+<!-- Конец контент -->
+

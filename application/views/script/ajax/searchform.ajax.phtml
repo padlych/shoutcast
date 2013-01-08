@@ -1,0 +1,33 @@
+<form name="my_form" id="my_form" action="/ajax/search" method="post"
+      style="width:600px; height:420px; position:fixed; top:13%; left:50%;
+        margin-left: -300px; border: 1px solid #3fdaff;
+        border-radius: 5px; background: rgba(0,105,155,0.84); z-index: 9999;
+        padding:20px;">
+<img id="close_search" style="position: absolute; top: 0%; left:97%; margin-top: -12px; cursor: pointer;"
+     src="/images/close_button.png">
+<fieldset style="float:left; width:100%; margin-bottom: 20px; z-index: 9999;">
+    <label style="color:white;">Название станции: <input type="text" id="channel" name="channel" value="Chill" ></label>
+    <label style="color:white; margin-left: 20px;">Качество: <select style="width:143px;" id="bitrate" name="bitrate">
+        <option selected="selected" value="all">любое</option>
+        <?php foreach ($this->streams as $stream) { ?>
+        <option value="<?php echo $stream->getBitrate();?>"><?php echo $stream->getBitrate();?> kbit/s</option>
+       <?php }?>
+    </select>
+    </label>
+    <label></label>
+</fieldset>
+<fieldset style="width: 100%;  margin-top: 10px; border-top: 1px solid #3fdaff; padding: 5px; z-index: 9999;">
+<?php foreach ($this->styles as $style) { ?>
+    <label style="color:white; float:left; width: 100px; margin-left: 40px;">
+        <?php echo $style->getStyle(); ?> <input name="style_<?php echo $style->getId(); ?>"
+                      value="<?php echo $style->getId(); ?>" type="checkbox"
+                      style="float:right;">
+    </label>
+<?php }?>
+</fieldset>
+<fieldset style="width:100%; border-top: 1px solid #3fdaff;">
+    <center>
+        <input class="search_button" type="button" value="" style="margin: 5px;" id="send_form">
+    </center>
+</fieldset>
+</form>

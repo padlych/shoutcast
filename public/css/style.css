@@ -1,0 +1,292 @@
+/*--------------------------------------------------------
+   Основная таблица стилей
+---------------------------------------------------------*/
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    background: url(../images/bg.jpg) center -60px no-repeat;
+    font-size: 13px;
+    color: #666;
+    position: relative;
+    margin: 0 auto;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    z-index: 0;
+    width: 100%;
+    min-width: 960px;
+    max-width: 1440px;
+    behavior: url(csshover.htc);
+    margin-top: -60px
+}
+
+a {
+    text-decoration: underline;
+    color: #1689d1;
+}
+
+a:hover {
+    color: #ff6600;
+}
+
+/*--------------------------------------------
+  Таблица стилей для шапки
+--------------------------------------------*/
+#banet_top {
+    height: 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+/*------------------------------
+   Шапка
+----------------------------*/
+#head {
+    padding: 61px 0 0 0;
+    width: 960px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+#search {
+    padding: 80px 0 0 54px;
+    overflow: hidden;
+    zoom: 1;
+}
+
+#search a {
+    color: #003c5b;
+    font-size: 13px;
+    display: block;
+    margin: 0 0 3px 175px;
+    width: 160px;
+    text-align: right;
+}
+
+span.search_text {
+    background: url(../images/search.gif) 0 0 no-repeat;
+    width: 342px;
+    height: 18px;
+    display: block;
+    float: left;
+    padding: 2px 4px 0 5px;
+    margin-top: 4px;
+}
+
+* html span.search_text {
+    width: 336px;
+}
+
+span.search_text input {
+    background: 1px red solid;
+    width: 331px;
+    height: 17px;
+    border: 0;
+    zoom: 0;
+    float: left;
+}
+
+.search_button {
+    background: url(../images/searc_button.gif) 0 0 no-repeat;
+    width: 81px;
+    height: 29px;
+    cursor: pointer;
+}
+
+.search_button:hover {
+    background: url(../images/searc_button.gif) 0 -29px no-repeat;
+}
+
+#navigator {
+    position: absolute;
+    top: 66px;
+    right: 0;
+    height: 14px;
+}
+
+span.home {
+    display: block;
+    width: 11px;
+    height: 14px;
+    background: url(../images/ico_home.gif) 0 0 no-repeat;
+    float: left;
+    margin-right: 20px;
+}
+
+a.mail {
+    display: block;
+    width: 12px;
+    height: 14px;
+    background: url(../images/ico_mail.gif) 0 0 no-repeat;
+    float: left;
+    margin-right: 20px;
+    font-size: 10px;
+}
+
+a:hover.mail {
+    background: url(../images/ico_mail.gif) 0 -15px no-repeat;
+}
+
+a.map {
+    display: block;
+    width: 13px;
+    height: 14px;
+    background: url(../images/ico_map.gif) 0 0 no-repeat;
+    float: left;
+    font-size: 10px;
+}
+
+a:hover.map {
+    background: url(../images/ico_map.gif) 0 -15px no-repeat;
+}
+
+a.add {
+    position: absolute;
+    display: block;
+    background: url(../images/shooting.gif) 0 0 no-repeat;
+    padding: 3px 0 3px 27px;
+    height: 18px;
+    top: 91px;
+    right: 0;
+    color: #fff;
+    font-size: 13px;
+}
+
+a:hover.add {
+    background: url(../images/shooting.gif) 0 -24px no-repeat;
+    color: #003c5b;
+    text-decoration: underline;
+}
+
+/*------------------------------
+  Лого
+----------------------------*/
+#logo {
+    float: left;
+    width: 226px;
+    height: 126px;
+}
+
+/*------------------------------
+   Основное меню
+----------------------------*/
+
+#menu {
+    background: url(../images/menu_l.gif) left 0 no-repeat;
+    height: 60px;
+    overflow: hidden;
+    position: absolute;
+    top: 60px;
+    left: 231px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#menu div {
+    background: url(../images/menu_r.gif) right 0 no-repeat;
+    padding: 0 12px;
+    display: block;
+    float: left;
+}
+
+#menu div ul {
+    background: url(../images/menu_f.gif) 0 0 repeat-x;
+    height: 60px;
+    overflow: hidden;
+    float: left;
+}
+
+#menu div ul li {
+    list-style: none;
+    float: left;
+    padding-right: 2px;
+    background: url(../images/menu_lin.gif) right 0 no-repeat;
+}
+
+#menu div ul li a {
+    display: block;
+    float: left;
+    color: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 28px 14px 0 13px;
+    height: 61px;
+    text-decoration: none;
+}
+
+#menu div ul li a:hover {
+    background: url(../images/menu_lin.gif) 0 -80px repeat-x;
+}
+
+/*-----------------------------------------
+   Подвал
+-------------------------------------------*/
+
+#footer {
+    height: 87px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: url(../images/footer_bg.gif) 0 0 repeat-x;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+#footer_blok {
+    width: 960px;
+    background: url(../images/footer_fon.jpg) 0 0 no-repeat;
+    margin: 0 auto;
+    height: 87px;
+}
+
+#footer_left {
+    font-size: 12px;
+    color: #000;
+    padding-top: 28px;
+    width: 180px;
+    float: left;
+}
+
+#footer_left p {
+    font-family: Tahoma;
+    font-size: 11px;
+    color: #16314b;
+    padding-top: 6px;
+}
+
+#footer_menu {
+    float: right;
+    padding-top: 28px;
+}
+
+#footer_menu li {
+    list-style: none;
+    padding-right: 5px;
+    margin-right: 5px;
+    border-right: 1px #456da1 solid;
+    float: left;
+}
+
+#footer_menu li a {
+    font-size: 13px;
+    color: #000;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+#footer_menu li a:hover {
+    color: #9be9ff;
+    text-decoration: underline;
+}
